@@ -1,16 +1,11 @@
-require('dotenv').config();
-const stuff = process.env.ACCOUNTS;
-
-$.get('/account.json',{},function(content){
-    let lines=content.split('\n');
-
-     console.log(`"file.txt" contains ${lines.length} lines`)
-    console.log(`First line : ${lines[0]}`)
-
-});
+let accountKeys = require('./account.json').accountKeys;
+let accountDetails = [];
 
 function getStats(){
     fetch(`https://api.splinterlands.io/players/quests?username=`);
+
 }
 
-console.log(accountStuff)
+for(i = 0; i<accountKeys.length; i++){
+    console.log(accountKeys[i], 'bitch');
+}
