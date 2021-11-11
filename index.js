@@ -13,9 +13,9 @@ async function start(){
     for(i = 0; i<account.length; i++){
         // console.log(accountKeys[i], 'bitch');
         let response = await getStats(account[i][0], account[i][1]);
-        accountDetails.push(response);
+        accountDetails.push(response.data[0].rewards);
     }
-    console.log('HERE YOU GO: ', accountDetails)
+    console.log('nothing yet', accountDetails)
 }
 
 start();
