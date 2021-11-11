@@ -1,11 +1,17 @@
-let accountKeys = require('./account.json').accountKeys;
+let account = require('./account.json').account;
 let accountDetails = [];
 
-function getStats(){
-    fetch(`https://api.splinterlands.io/players/quests?username=`);
-
+async function getStats(username, key){
+    try {
+        console.log('works ', username, key);
+        fetch(`https://api.splinterlands.io/players/quests?username=`);
+    }
+    catch{
+        console.log(`Could not get info from accout: ${username}`)
+    }
 }
 
-for(i = 0; i<accountKeys.length; i++){
-    console.log(accountKeys[i], 'bitch');
+for(i = 0; i<account.length; i++){
+    // console.log(accountKeys[i], 'bitch');
+    getStats(account[i][0], account[i][1]);
 }
