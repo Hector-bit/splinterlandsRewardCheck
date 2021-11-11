@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Hector-bit/splinlterlandsRewardCheck/issues"
   },
-  "homepage": "https://github.com/Hector-bit/splinlterlandsRewardCheck#readme"
+  "homepage": "https://github.com/Hector-bit/splinlterlandsRewardCheck#readme",
+  "dependencies": {
+    "axios": "^0.24.0"
+  }
 }
