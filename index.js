@@ -4,24 +4,34 @@ let account = require('./account.json').account;
 let accountDetails = [];
 
 function getStats(username){
-    axios.get(`https://api.splinterlands.io/players/quests?username=${username}`)
-    .then(response => {
-        return response.data[0].rewards
-    })
-    .catch(error => {
-        console.log('could not find user: ', username);
-        console.log('THE ERROR: ', error);
-    })
+    const questInfo = axios.get(`https://api.splinterlands.io/players/quests?username=${username}`)
+    // .then(response => {
+    //     // console.log(response, 'sfasdf')
+    //     returnData = response.data
+    //     console.log(returnData)
+    //     return returnData
+    // })
+    // .catch(error => {
+    //     console.log('could not find user: ', username);
+    //     console.log('THE ERROR: ', error);
+    //     return "error"
+    // })
+    // return "nothing"
+    if(questInfo != "undefined"){
+        return questInfo;
+    } else {
+        return "Nothing";
+    }
 }
 
 async function start(){
     accounts = 0
     for(i = 0; i<account.length; i++){
-        // console.log(accountKeys[i], 'bitch');
-        let response = await getStats(account[i][0]);
-        if(response != undefined){
+        const questRewards = await getStats(account[i][0]);
+        // console.log(questRewards);
+        if(questRewards != undefined){
             accounts += 1
-            accountDetails.push(response);   
+            accountDetails.push(questRewards.data[0].rewards);   
         }
     }
     console.log(`Out of ${accounts} you collected the following`)
