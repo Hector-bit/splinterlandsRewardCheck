@@ -1,6 +1,7 @@
 
 const axios = require('axios');
 let account = require('./account.json').account;
+let cardDict = require('./cards.json');
 let accountDetails = [];
 
 async function getTrxlDetails(trl){
@@ -17,6 +18,7 @@ async function getTrxlDetails(trl){
 function getStats(username){
     const questInfo = axios.get(`https://api.splinterlands.io/players/quests?username=${username}`)
     if(questInfo != "undefined"){
+
         return questInfo;
     } else {
         return "Nothing";
@@ -30,7 +32,9 @@ async function start(){
         console.log(questRewards.data[0]);
         if(questRewards != undefined){
             accounts += 1
-            accountDetails.push(questRewards.data[0].rewards);   
+            if(questRewards.data[0].claim_trx_id != null){
+                getTrxlDetails(questRewards.data[0].claim_trx_id)
+            }   
         }
     }
     console.log(`Out of ${accounts} you collected the following`)

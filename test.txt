@@ -1,0 +1,5 @@
+		cardDetails.put(1, "Goblin Shaman");
+		cardDetails.put(2, "Giant Roc");
+		cardDetails.put(3, "Kobold Miner");
+		cardDetails.put(4, "Fire Beetle");
+		cardDetails.put(5, "Malric Inferno");
