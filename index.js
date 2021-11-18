@@ -3,20 +3,19 @@ const axios = require('axios');
 let account = require('./account.json').account;
 let accountDetails = [];
 
+async function getTrxlDetails(trl){
+    try{
+        const details = await axios.get("https://api.splinterlands.io/transactions/lookup?trx_id="+trl);
+        return details;
+    }
+    catch{
+        console.log('could not get trl details');
+        return "no details";
+    }
+}
+
 function getStats(username){
     const questInfo = axios.get(`https://api.splinterlands.io/players/quests?username=${username}`)
-    // .then(response => {
-    //     // console.log(response, 'sfasdf')
-    //     returnData = response.data
-    //     console.log(returnData)
-    //     return returnData
-    // })
-    // .catch(error => {
-    //     console.log('could not find user: ', username);
-    //     console.log('THE ERROR: ', error);
-    //     return "error"
-    // })
-    // return "nothing"
     if(questInfo != "undefined"){
         return questInfo;
     } else {
@@ -28,7 +27,7 @@ async function start(){
     accounts = 0
     for(i = 0; i<account.length; i++){
         const questRewards = await getStats(account[i][0]);
-        // console.log(questRewards);
+        console.log(questRewards.data[0]);
         if(questRewards != undefined){
             accounts += 1
             accountDetails.push(questRewards.data[0].rewards);   
