@@ -29,11 +29,12 @@ async function start(){
     accounts = 0
     for(i = 0; i<account.length; i++){
         const questRewards = await getStats(account[i][0]);
-        console.log(questRewards.data[0]);
+        // console.log(questRewards.data[0]);
         if(questRewards != undefined){
             accounts += 1
             if(questRewards.data[0].claim_trx_id != null){
-                getTrxlDetails(questRewards.data[0].claim_trx_id)
+                let newData = await getTrxlDetails(questRewards.data[0].claim_trx_id);
+                accountDetails.push(newData.data.trx_info.result);
             }   
         }
     }
