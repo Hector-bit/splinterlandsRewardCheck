@@ -15,6 +15,23 @@ async function getTrxlDetails(trl){
     }
 }
 
+async function parsePotions(object){
+    let string = `${object.potion_type} ${object.type}`
+    return string
+}
+
+async function parseCards(object){
+    console.log('card', object)
+    let string = 'cards'
+    return string
+}
+
+async function parseTokens(object){
+    // console.log('token', object)
+    let string = `${object.quantity} ${object.type}`;
+    return string
+}
+
 function getStats(username){
     const questInfo = axios.get(`https://api.splinterlands.io/players/quests?username=${username}`)
     if(questInfo != "undefined"){
@@ -33,8 +50,20 @@ async function start(){
         if(questRewards != undefined){
             accounts += 1
             if(questRewards.data[0].claim_trx_id != null){
-                let newData = await getTrxlDetails(questRewards.data[0].claim_trx_id);
-                accountDetails.push(newData.data.trx_info.result);
+                let info = questRewards.data[0];
+                let player = info.player;
+                let reward = JSON.parse(info.rewards)[0];
+                // let newData = await getTrxlDetails(questRewards.data[0].claim_trx_id);
+                let newString;
+                if(reward.type == "potion"){
+                    newString = await parsePotions(reward);
+                }
+                else if (reward.type == "credits"){
+                    newString = await parseTokens(reward);
+                } else if(reward.type == "card"){
+                    newString = await parseCards(reward);
+                }
+                accountDetails.push(`PLAYER: ${player}, ${newString}`);
             }   
         }
     }
