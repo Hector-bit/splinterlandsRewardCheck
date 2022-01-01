@@ -3,6 +3,7 @@ const axios = require('axios');
 let account = require('./account.json').account;
 // let cardDict = require('./cards.json');
 let accountDetails = [];
+
 cardDict = {
         " 1 " : "Goblin Shaman" ,
         " 2 " : "Giant Roc" ,
@@ -386,10 +387,12 @@ async function parseTokens(object){
     return string
 }
 
-function getStats(username){
-    const questInfo = axios.get(`https://api.splinterlands.io/players/quests?username=${username}`)
-    if(questInfo != "undefined"){
+async function getStats(username){
+    console.log(username)    
+    const questInfo = await axios.get(`https://api.splinterlands.io/players/quests?username=${username}`)
+    console.log(questInfo)
 
+    if(questInfo != undefined){
         return questInfo;
     } else {
         return "Nothing";
@@ -399,8 +402,8 @@ function getStats(username){
 async function start(){
     accounts = 0
     for(i = 0; i<account.length; i++){
+        console.log(account[i][0])
         const questRewards = await getStats(account[i][0]);
-        // console.log(questRewards.data[0]);
         if(questRewards != undefined){
             accounts += 1
             if(questRewards.data[0].claim_trx_id != null){
