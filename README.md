@@ -1,4 +1,4 @@
 # splinterlandsRewardCheck
 quick little thing to look up your splinterlands rewards
 
-BROKEN at the moment
+

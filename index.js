@@ -387,10 +387,8 @@ async function parseTokens(object){
     return string
 }
 
-async function getStats(username){
-    console.log(username)    
+async function getStats(username){  
     const questInfo = await axios.get(`https://api.splinterlands.io/players/quests?username=${username}`)
-    console.log(questInfo)
 
     if(questInfo != undefined){
         return questInfo;
@@ -410,7 +408,6 @@ async function start(){
                 let info = questRewards.data[0];
                 let player = info.player;
                 let reward = JSON.parse(info.rewards)[0];
-                // let newData = await getTrxlDetails(questRewards.data[0].claim_trx_id);
 
                 let newString;
                 if(reward.type == "potion"){
