@@ -7,18 +7,6 @@ make sure to make a JSON file and name it account.json : make sure to format it 
     "account": [
         ["account"],
         ["account"],
-        ["account"],
-        ["account"],
-        ["account"],
-        ["account"],
-        ["account"],
-        ["account"],
-        ["account"],
-        ["account"],
-        ["account"],
-        ["account"],
-        ["account"],
-        ["account"],
         ["account"]
     ]
 }
